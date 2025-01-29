@@ -31,3 +31,8 @@ build/
 
 ### VS Code ###
 .vscode/
+/.gitattributes
+/.gitignore
+/.mvn/
+/README.md
+/frontend/

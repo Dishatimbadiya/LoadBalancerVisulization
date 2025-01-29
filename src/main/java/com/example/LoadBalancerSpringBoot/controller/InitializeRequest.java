@@ -10,6 +10,7 @@ public class InitializeRequest {
     }
 
     public void setStrategy(String strategy) {
+    	System.out.println("Hey Str set...");
         this.strategy = strategy;
     }
 
