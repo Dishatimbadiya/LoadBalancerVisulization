@@ -26,16 +26,14 @@ public class Server {
 
     public synchronized int assignRequest() {
         activeConnections++;
-        weight --;
         executorService.submit(() -> {
             try {
-                Thread.sleep(2000);
+                Thread.sleep(5000);
             } catch (InterruptedException e) {
                 Thread.currentThread().interrupt();
             } finally {
                 synchronized (this) {
                     activeConnections--;
-                    weight++;
                 }
             }
         });
