@@ -6,36 +6,50 @@ export default function RequestPage() {
     const { algorithm, numServers } = router.query;
     const [serverRequests, setServerRequests] = useState([]);
     const [requestId, setRequestId] = useState(1);
+    const [isLoading, setIsLoading] = useState(false);
 
     useEffect(() => {
         if (numServers) {
-            setServerRequests(Array(parseInt(numServers, 10)).fill([]));
+            setServerRequests(Array.from({ length: parseInt(numServers, 10) }, () => []));
         }
     }, [numServers]);
 
     const handleSendRequest = async () => {
+        if (isLoading) return; // Prevent multiple requests
+        setIsLoading(true);
+
         const url = `http://localhost:8080/api/loadbalancer/request/${algorithm}`;
         try {
             const response = await fetch(url, { method: 'POST' });
 
             if (response.ok) {
                 const serverId = await response.json();
+                if (serverId == -1) {
+                    return;
+                }
                 console.log(`Request handled by server: ${serverId}`);
 
                 setServerRequests((prevRequests) => {
                     const updatedRequests = [...prevRequests];
-                    updatedRequests[serverId - 1] = [
-                        ...updatedRequests[serverId - 1],
-                        `Request ${requestId}`
-                    ];
+                    if (serverId > 0 && serverId <= updatedRequests.length) {
+                        updatedRequests[serverId - 1] = [
+                            ...(updatedRequests[serverId - 1] || []), // Ensure it's an array
+                            `Request ${requestId}`
+                        ];
+                    } else {
+                        console.error(`Invalid serverId: ${serverId}`);
+                    }
                     return updatedRequests;
                 });
 
-                // Remove request after 3 seconds
                 setTimeout(() => {
                     setServerRequests((prevRequests) => {
                         const updatedRequests = [...prevRequests];
-                        updatedRequests[serverId - 1] = updatedRequests[serverId - 1].slice(1);
+                        if (serverId > 0 && serverId <= updatedRequests.length) {
+                            updatedRequests[serverId - 1] = updatedRequests[serverId - 1].slice(1);
+                        } else {
+                            console.error(`Invalid serverId: ${serverId}`);
+                        }
                         return updatedRequests;
                     });
                 }, 5000);
@@ -47,6 +61,8 @@ export default function RequestPage() {
             }
         } catch (error) {
             console.error('Error:', error);
+        } finally {
+            setIsLoading(false); // Reset loading state
         }
     };
 
