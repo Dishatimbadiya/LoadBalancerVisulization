@@ -14,6 +14,14 @@ With this project, you can simulate and visualize four common load balancing alg
 2. **Weighted Round Robin Algorithm**
 3. **Least Connections Algorithm**
 
+## Demo
+
+![Home](./Load_balance_images/home.png)
+![Init](./Load_balance_images/init.png)
+![Round Robin](./Load_balance_images/RR.png)
+![Weighted Round Robin](./Load_balance_images/WRR.png)
+![Least Connection](./Load_balance_images/leastConnection.png)
+
 ---
 
 ## Algorithms Implemented
