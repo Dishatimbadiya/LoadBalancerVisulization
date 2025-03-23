@@ -14,32 +14,49 @@ With this project, you can simulate and visualize four common load balancing alg
 2. **Weighted Round Robin Algorithm**
 3. **Least Connections Algorithm**
 
-## Demo
+## Demo & Algorithms Implemented
+
+## 🎥 Demo
+
+Check out the key screens of the Load Balancer Visualization project in action! 🚀
+
+---
+
+### 🏠 Home Page
+The landing page where users can select different load balancing algorithms to visualize.
 
 ![Home](./Load_balance_images/home.png)
+
+---
+
+### ⚙️ Initialization Screen
+Configure your simulation:
+- Set the number of servers.
+- Define server weights (for Weighted Round Robin).
+- Enter client requests.
+
 ![Init](./Load_balance_images/init.png)
+
+---
+
+### 🔄 Round Robin Algorithm Visualization
+Requests are evenly distributed across all servers in a round-robin fashion.
+
 ![Round Robin](./Load_balance_images/RR.png)
+
+---
+
+### ⚖️ Weighted Round Robin Algorithm Visualization
+Servers with higher weights handle a proportionally larger number of requests.
+
 ![Weighted Round Robin](./Load_balance_images/WRR.png)
+
+---
+
+### 📉 Least Connections Algorithm Visualization
+Requests are assigned to the server with the fewest active connections in real-time.
+
 ![Least Connection](./Load_balance_images/leastConnection.png)
-
----
-
-## Algorithms Implemented
-
-### Round Robin Algorithm
-Distributes client requests sequentially among servers. This ensures an even distribution of requests across all available servers.
-
----
-
-### Weighted Round Robin Algorithm
-Assigns weights to servers, allowing servers with higher capacities to handle more requests. Requests are distributed based on the weights.
-
----
-
-### Least Connections Algorithm
-Assigns requests to the server with the least number of active connections. This ensures servers with lighter loads are prioritized.
-
----
 
 ---
 
